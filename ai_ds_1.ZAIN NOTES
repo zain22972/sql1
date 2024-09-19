@@ -1,0 +1,73 @@
+# CREATION OF TABLES 
+CREATE TABLE employees
+( employee_id number(10) NOT NULL,
+  employee_name varchar2(50) NOT NULL,
+  city varchar2(50)
+);
+
+
+# SEEING TABLES NAMES FROM ALL TBALES
+SELECT table_name
+FROM all_tables;
+
+
+# INSERTING VALUES 
+
+INSERT INTO T1  VALUES (1, 'Alice', 30, 'New York');
+INSERT INTO T1  VALUES (2, 'Bob', 25, 'Los Angeles');
+INSERT INTO T1  VALUES (3, 'Charlie', 35, 'Chicago');
+INSERT INTO T1  VALUES (4, 'Diana', 28, 'Houston');
+INSERT INTO T1  VALUES (5, 'Ethan', 40, 'Phoenix');
+INSERT INTO T1  VALUES (6, 'Fiona', 22, 'Philadelphia');
+INSERT INTO T1  VALUES (7, 'George', 45, 'San Antonio');
+INSERT INTO T1  VALUES (8, 'Hannah', 31, 'San Diego');
+
+# SHOW STRUCTURE OR DISPLAY TABLE
+DESC T1;
+
+
+# DELETE RECORDS EITHER ALL OR WITH SOME CONDITION 
+DELETE FROM table_name
+WHERE condition;
+ delete * from T1;
+
+# DROP TABLE DESTROYING THE STRUCTURE OF TABLE 
+DROP TABLE employees;
+
+# TRUNCATE ( DELETES RECORDS BUT NOT STRUCUTRE )
+TRUNCATE TABLE table_name;
+
+# SEEING TABLES NAMES FROM ALL TBALES
+SELECT table_name
+FROM all_tables;
+
+# COPY TABLE DATA FROM ANOTHER TABLE WITH DIFFERENT TABLE NAME (AS)
+CRTEATE TABHLE T2 AS
+SELECT * FROM T1;
+
+# TO SHOW ALL DATA FROM A TABLE (SELECT COMMAND )
+SELECT *
+FROM table_name;
+
+# TO SHOW TO A SPECIFIC COLUMN
+SELECT column_name
+FROM table_name;
+
+# TO SHOW MULTIPLE COLUMNS 
+SELECT column1, column2
+FROM table_name;
+
+# TO SHOW DATA WITH SOEM SPECIFICS ( BOTH CONDITION SHOULD STAISFY)
+SELECT column1, column2
+FROM table_name
+WHERE condition1 AND condition2;
+
+# he OR operator is used when you want to filter results that meet at least one of multiple criteria
+SELECT column1, column2
+FROM table_name
+WHERE condition1 OR condition2;
+
+
+# 
+
+
