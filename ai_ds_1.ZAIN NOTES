@@ -1,5 +1,5 @@
 # CREATION OF TABLES 
-CREATE TABLE employees
+CREATE TABLE employeesZAI
 ( employee_id number(10) NOT NULL,
   employee_name varchar2(50) NOT NULL,
   city varchar2(50)
@@ -67,7 +67,13 @@ SELECT column1, column2
 FROM table_name
 WHERE condition1 OR condition2;
 
+LAB DAY 2
 
-# 
+# CRETAE DEPARTMENT TBALE 
+CREATE TABLE departmentszai (
+    deptid NUMBER(10) PRIMARY KEY,
+    deptname VARCHAR2(50) NOT NULL
+);
+
 
 
