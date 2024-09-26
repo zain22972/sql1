@@ -75,5 +75,115 @@ CREATE TABLE departmentszai (
     deptname VARCHAR2(50) NOT NULL
 );
 
+CREATE TABLE employeesZAI
+( emp1 number(10) NOT NULL,
+  Fname varchar2(50) NOT NULL,
+  LnAME VARCHAR2(50) NOT NULL,
+  email varchar2(50) UNIQUE,
+  age   NUMBER(10)  CHECK(age>=18 and age<25),
+  deptid NUMBER(10)  Default 5, 
+  hire   date,
+  Salary NUMBER);
 
+
+# exsisting table adding constraint 
+ALTER TABLE employeesZAI
+ADD CONSTRAINT chk_hiredate CHECK (hire  > TO_DATE('2020-01-01', 'YYYY-MM-DD'));
+
+
+# exsisting table adding forighn key
+ALTER TABLE employeesZAI
+ADD CONSTRAINT fk_deptid FOREIGN KEY (deptid) REFERENCES departmentszai(deptid);
+
+
+
+
+
+
+
+CREATE TABLE employeesZAI
+( emp1 number(10) NOT NULL,
+  Fname varchar2(50) NOT NULL,
+  LnAME VARCHAR2(50) NOT NULL,
+  email varchar2(50) UNIQUE,
+  age   NUMBER(10)  CHECK(age>=18 and age<25),
+  deptid NUMBER(10)  Default 5, 
+  hire   date,
+  Salary NUMBER);
+
+
+# exsisting table adding constraint 
+ALTER TABLE employeesZAI
+ADD CONSTRAINT chk_hiredate CHECK (hire  > TO_DATE('2020-01-01', 'YYYY-MM-DD'));
+
+
+# exsisting table adding forighn key
+ALTER TABLE employeesZAI
+ADD CONSTRAINT fk_deptid FOREIGN KEY (deptid) REFERENCES departmentszai(deptid);
+
+ 
+
+# CRETAE DEPARTMENT Table
+CREATE TABLE departmentszai (
+    deptid NUMBER(10) PRIMARY KEY,
+    deptname VARCHAR2(50) NOT NULL
+);
+
+# ADDING A COLUMN TO EMPLOYEES TABLE 
+
+ALTER TABLE employeesZAI
+ADD GENDER  NUMBER(10); 
+
+# ALTER A COLUMN DATATYPE OF YOUR CHOICE 
+MODIFY GENDER VARCHAR2(50);
+
+# DELETE A CLOUMN  
+ALTER TABLE employeesZAI
+DROP COLUMN GENDER;  ( FOR DROPPING A COLUMN A COLUMN WORD SHOULD BE PRESENT)
+
+# CREATE DEPARTMENT TABLE 
+CREATE TABLE departmentszai (
+    deptid NUMBER(10) PRIMARY KEY,
+    deptname VARCHAR2(50) NOT NULL
+);
+
+# SHOW THE ROWS IN EMPLOYEE TABLE 
+  SELECT * FROM employeesZAI;
+
+INSERT MULTIPLE RECORDS IN DEPARTMENTS TABLE AND EMPLOYEES TABLE 
+
+INSERT ALL
+       INTO departmentszai (deptid,deptname) VALUES (1,'CSE')
+       INTO departmentszai (deptid,deptname) VALUES (2,'MECH')
+       INTO departmentszai (deptid,deptname) VALUES (3,'CIVIL')
+       INTO departmentszai (deptid,deptname) VALUES (4,'AIML')
+       INTO departmentszai (deptid,deptname) VALUES (5,'AIDS')
+       SELECT * FROM DUAL;
+
+INSERT ALL
+    INTO employeesZAI (emp1, Fname, LnAME, email, age, deptid, hire, Salary) VALUES (1, 'John', 'Doe', 'john.doe@example.com', 22, 5, TO_DATE('2022-06-15', 'YYYY-MM-DD'), 50000)
+    INTO employeesZAI (emp1, Fname, LnAME, email, age, deptid, hire, Salary) VALUES (2, 'Jane', 'Smith', 'jane.smith@example.com', 24, 3, TO_DATE('2021-09-01', 'YYYY-MM-DD'), 55000)
+    INTO employeesZAI (emp1, Fname, LnAME, email, age, deptid, hire, Salary) VALUES (3, 'Emily', 'Johnson', 'emily.johnson@example.com', 23, 2, TO_DATE('2023-01-20', 'YYYY-MM-DD'), 60000)
+    INTO employeesZAI (emp1, Fname, LnAME, email, age, deptid, hire, Salary) VALUES (4, 'Michael', 'Brown', 'michael.brown@example.com', 21, 1, TO_DATE('2022-11-05', 'YYYY-MM-DD'), 52000)
+    INTO employeesZAI (emp1, Fname, LnAME, email, age, deptid, hire, Salary) VALUES (5, 'Linda', 'Davis', 'linda.davis@example.com', 24, 4, TO_DATE('2021-12-15', 'YYYY-MM-DD'), 58000)
+SELECT * FROM dual;
+
+5 rows created.
+
+WHERE CONDITION
+SELECT * FROM employeesZAI
+WHERE Salary > 50000;
+
+EXSISTS CONDITION 
+
+SELECT * FROM employeesZAI e
+WHERE EXISTS (
+    SELECT 5 FROM departmentszai d
+    WHERE d.deptid = e.deptid
+);
+
+IN CONDTION 
+SELECT * FROM employeesZAI
+WHERE deptid IN 
+);
 
