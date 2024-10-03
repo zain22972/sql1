@@ -150,7 +150,7 @@ CREATE TABLE departmentszai (
 # SHOW THE ROWS IN EMPLOYEE TABLE 
   SELECT * FROM employeesZAI;
 
-INSERT MULTIPLE RECORDS IN DEPARTMENTS TABLE AND EMPLOYEES TABLE 
+# INSERT MULTIPLE RECORDS IN DEPARTMENTS TABLE AND EMPLOYEES TABLE 
 
 INSERT ALL
        INTO departmentszai (deptid,deptname) VALUES (1,'CSE')
@@ -170,11 +170,11 @@ SELECT * FROM dual;
 
 5 rows created.
 
-WHERE CONDITION
+# WHERE CONDITION
 SELECT * FROM employeesZAI
 WHERE Salary > 50000;
 
-EXSISTS CONDITION 
+# EXSISTS CONDITION 
 
 SELECT * FROM employeesZAI e
 WHERE EXISTS (
@@ -182,8 +182,121 @@ WHERE EXISTS (
     WHERE d.deptid = e.deptid
 );
 
-IN CONDTION 
+# IN CONDTION 
 SELECT * FROM employeesZAI
 WHERE deptid IN 
 );
+
+
+
+# BETWEEN  CONDTITON 
+
+SELECT * FROM employeesZAI
+WHERE salary BETWEEN 50000 AND 60000;
+
+# NULL CONDITION 
+
+SELECT * 
+FROM employeesZAI
+WHERE emp1 IS NULL;
+
+# LIKE CONDITIOIN 
+
+SELECT * 
+FROM employeesZAI
+WHERE Fname LIKE 'J%';
+
+# create the alias name for column 
+
+SELECT age as age_25 from employeesZAI
+WHERE age > 22;
+
+
+# ALIAS TABLE 
+
+select * from empployeesZAI e, deptmentszai d where e.deptid == d.deptid  
+
+# WITH CONDITON
+SELECT * 
+FROM employeesZAI e, departmentsZAI d 
+WHERE e.deptid = d.deptid 
+AND d.deptid = 1;
+
+# SHOW THE INCREAMENTED SALARY OF AN EMPLOYEE 
+
+SELECT Salary AS E_Salary , Salary + 5000 AS Incremented Salray from employeesZAI; 
+
+ # GROUP BY DEPARTMENT IDS OF EMPLOYESS 
+
+SELECT deptid, 
+       COUNT(*) AS employee_count, 
+       SUM(salary) AS total_salary,
+       AVG(salary) AS average_salary
+FROM employeesZAI
+GROUP BY deptid;
+
+ # IMPLEMENT A NESTED QUERY 
+
+SELECT Fname 
+FROM employeesZAI
+WHERE deptid IN (
+    SELECT deptid
+    FROM departmentsZAI
+    WHERE deptName = 'CSE'
+);
+
+# UPDATE THE SALARY OF EMPLOYYES BY 1000(INCREASED * 1000)
+
+UPDATE employeesZAI
+SET salary = salary * 1000
+WHERE deptid IN (
+    SELECT deptid
+    FROM departmentsZAI
+    WHERE deptName = 'CSE'
+);
+
+
+# NATURAL JOIN ( JOINING OF 2 TABLES DATA )
+SELECT *
+FROM employeesZAI
+NATURAL JOIN departmentszai;
+
+
+# CROSS JOIN ( 
+SELECT 
+    e.emp1, 
+    e.Fname, 
+    d.deptid, 
+    d.deptname
+FROM 
+    employeesZAI e
+CROSS JOIN 
+    departmentszai d;
+
+# SELF JOIN(BEFORE THIS WE NEED MANAGEER COLUMN )
+
+# BEFORE SELF JOIN ( ADDING MANAGER COLUMN)
+
+ALTER TABLE employeesZAI
+ADD manager_id NUMBER;
+
+# UPDATE employeesZAI
+SET manager_id = 1  
+WHERE emp1 IN (2, 3);  
+
+SELECT emp1, Fname, manager_id
+FROM employeesZAI;
+
+# SELF JOIN WITH INNER JOIN 
+
+SELECT 
+    e.emp1 AS employee_id,
+    e.Fname AS employee_name,
+    m.manager_id AS manager_id,
+    m.Fname AS manager_name
+FROM 
+    employeesZAI e
+INNER JOIN 
+    employeesZAI m 
+ON e.manager_id = m.emp1;
 
