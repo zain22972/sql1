@@ -1,0 +1,313 @@
+1. Create the PRODUCTS1 Table:
+
+CREATE TABLE PRODUCTS1 (
+  PID NUMBER(10) PRIMARY KEY,
+  pname VARCHAR2(50) NOT NULL,
+  prize VARCHAR2(50) NOT NULL,
+  category VARCHAR2(50) NOT NULL
+);
+
+-- Output:
+-- Table created.
+
+2. Insert a Single Record into the PRODUCTS1 Table:
+
+INSERT INTO PRODUCTS1 (PID, pname, prize, category)
+VALUES (1, 'Alice', '30', 'New York');
+
+-- Output:
+-- 1 row created.
+
+3. Insert Multiple Records into the PRODUCTS1 Table:
+
+INSERT ALL
+  INTO PRODUCTS1 (PID, pname, prize, category) VALUES (2, 'Bob', '45', 'California')
+  INTO PRODUCTS1 (PID, pname, prize, category) VALUES (3, 'Charlie', '55', 'Texas')
+SELECT * FROM dual;
+
+-- Output:
+-- 2 rows created.
+
+4. SHOW THE PRODUCTS TBALE 
+
+SELECT * FROM PRODUCTS1;
+
+
+       PID PNAME
+---------- --------------------------------------------------
+PRIZE
+--------------------------------------------------
+CATEGORY
+--------------------------------------------------
+         2 Bob
+45
+California
+
+         3 Charlie
+55
+Texas
+
+       PID PNAME
+---------- --------------------------------------------------
+PRIZE
+--------------------------------------------------
+CATEGORY
+--------------------------------
+
+
+
+
+WAQ TO FIND ALL PRODUCTNAME AND CATGORY >1000 FROM THE PRODUCTS TABLE 
+
+SELECT pname, category
+FROM PRODUCTS1
+WHERE TO_NUMBER(prize) > 1000;
+
+OUTPUT
+
+PNAME
+--------------------------------------------------
+CATEGORY
+--------------------------------------------------
+Frank
+Appliances
+
+Grace
+Furniture
+
+
+WAQ TO CALCULATE THE AVG SALARY FOR ALL COMAPNIES 
+RENAME THE COLUMN AS AVG_SALARY 
+ 
+1. CREATE WORKS TABLE 
+2. EMPLOYEE ID COMPAMY NAME SALARY
+INSERT SINGLE AND MULTIPLE RECORD THEN THE AMIN QUERY  
+
+Step 1: Create the WORKS Table
+
+Here’s how you can create the WORKS table with the required columns:
+
+-- Step 1: Create the WORKS table
+CREATE TABLE WORKS (
+    employee_id NUMBER PRIMARY KEY,
+    company_name VARCHAR2(50),
+    salary NUMBER
+);
+
+-- Step 2: Insert multiple records
+INSERT ALL
+    INTO WORKS (employee_id, company_name, salary) VALUES (1, 'CompanyA', 50000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (2, 'CompanyA', 55000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (3, 'CompanyB', 60000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (4, 'CompanyB', 70000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (5, 'CompanyC', 80000)
+SELECT * FROM dual;
+
+-- Step 3: Query to calculate the average salary by company
+
+SELECT AVG(salary) AS AVG_SALARY
+FROM WORKS;
+
+
++++++-----------------------------------------------------+++++++
+
+CREATE TABLE DEPARTMENT (
+    dept_id NUMBER PRIMARY KEY,                -- dept_id replaces employee_id
+    dept_name VARCHAR2(50),                    -- dept_name replaces company_name
+    location VARCHAR2(100) NOT NULL            -- location replaces salary, with NOT NULL constraint
+);
+
+
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (1, 'HR', 'New York');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (2, 'IT', 'San Francisco');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (3, 'Sales', 'Chicago');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (4, 'Finance', 'Seattle');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (5, 'Marketing', 'San Diego');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (6, 'Research', 'Sao Paulo');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (7, 'Operations', 'Stockholm');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (8, 'Legal', 'Singapore');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (9, 'Customer Support', 'Sydney');
+
+QUERY TO SHOW DEPTNAME ,LOCATION OF PEOPLE WHO LIVE IN LOCATION THT START WITH S
+
+SELECT dept_name, location
+FROM DEPARTMENT
+WHERE location LIKE 'S%';
+
+++++++++++++-----------------------------------------+++++++++++++
+"Write a SQL query to find all the distinct company names from the WORKS table."
+
+SELECT DISTINCT company_name FROM WORKS;
+
+COMPANY_NAME
+--------------------------------------------------
+CompanyC
+CompanyB
+CompanyA
+
++++++++++------------------------------------------------+++++++++
+ WAQ TO FIND THE TOTAL COUNT OF BOOKS WHEN GNRE IN FICTION 
+
+1. CREATE A TABLE BOOKS (ID NUMBER,TITLE,AUTHOR,GENRE,PRICE DECIMAL,PYEAR NUMBER )
+
+FICTION
+FANTASY
+DYSTOPIAN
+HISTORICAL
+COMPUTERS
+ELECTRONICS
+SCI-FI
+NOVEL
+MYSTERY 
+
+
+CREATE TABLE BOOKS (
+    ID NUMBER(3) PRIMARY KEY,        -- ID: Numeric column with up to 3 digits (0-999)
+    TITLE VARCHAR2(100),              -- TITLE: Book title (up to 100 characters)
+    AUTHOR VARCHAR2(100),             -- AUTHOR: Author name (up to 100 characters)
+    GENRE VARCHAR2(50),               -- GENRE: Genre of the book (up to 50 characters)
+    PRICE DECIMAL(10, 2),             -- PRICE: Price with 2 decimal places (up to 10 digits total)
+    PYEAR NUMBER(4)                  -- PYEAR: Publication year as a 4-digit number
+);
+
+
+-- Inserting books with different genres
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (1, 'The Great Gatsby', 'F. Scott Fitzgerald', 'FICTION', 10.99, 1925);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (2, 'The Hobbit', 'J.R.R. Tolkien', 'FANTASY', 12.99, 1937);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (3, '1984', 'George Orwell', 'DYSTOPIAN', 8.99, 1949);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (4, 'The Book Thief', 'Markus Zusak', 'HISTORICAL', 11.49, 2005);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (5, 'Clean Code', 'Robert C. Martin', 'COMPUTERS', 39.99, 2008);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (6, 'The Innovators', 'Walter Isaacson', 'ELECTRONICS', 18.99, 2014);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (7, 'Dune', 'Frank Herbert', 'SCI-FI', 15.99, 1965);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (8, 'Pride and Prejudice', 'Jane Austen', 'NOVEL', 9.99, 1813);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (9, 'The Girl with the Dragon Tattoo', 'Stieg Larsson', 'MYSTERY', 14.99, 2005);
+
+
+SELECT * FROM BOOKS 
+SELECT GENRE FROM BOOKS;
+SELECT COUNT(*) FROM BOOKS;
+SELECT COUNT(*) FROM FICTION_COUNT FROM BOOKS WHERE GENRE ="FICTION";
+
++-+++++++++++++++++++++++------------------------------------------------------------------------------------------------------------------------------------------------------------------+++++++++++++++++++++++
+
+WAQ TO SELECT ONLY MOVIE NAMES WHERE THE RATING ARE GREATER THAN 7 BUT LESS THAN 9 
+
+ CREATE TABLE CIENMA 
+
+
+ COLUMN NAMES MOVIE ID  
+NAME 
+ DESCRIPTION
+ RATING 
+
+-- Step 1: Create the CIENMA table
+CREATE TABLE CIENMA (
+    MOVIE_ID NUMBER PRIMARY KEY,          -- Unique identifier for each movie
+    NAME VARCHAR2(100),                   -- Movie name (up to 100 characters)
+    DESCRIPTION VARCHAR2(500),            -- Description of the movie (up to 500 characters)
+    RATING NUMBER(3,1)                    -- Rating of the movie (e.g., 8.5, 7.8) with 1 decimal place
+);
+
+-- Step 2: Insert sample data into the CIENMA table
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (1, 'The Dark Knight', 'A Batman movie where he faces off against the Joker.', 8.9);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (2, 'The Matrix', 'A hacker discovers the truth about the world.', 8.7);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (3, 'Inception', 'A thief who enters the dreams of others to steal secrets.', 8.8);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (4, 'Shutter Island', 'A U.S. Marshal investigates a psychiatric facility on an island.', 7.5);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (5, 'The Social Network', 'The story of Facebook and its rise to prominence.', 8.0);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (6, 'Titanic', 'A love story set against the backdrop of the Titanic disaster.', 7.9);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (7, 'Avatar', 'A paraplegic marine dispatched to the moon Pandora on a unique mission.', 7.8);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (8, 'Interstellar', 'A team of explorers travels through a wormhole in space.', 8.4);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (9, 'The Prestige', 'Two magicians engage in a bitter rivalry.', 8.5);
+
+-- Step 3: Select movie names where the rating is greater than 7 but less than 9
+SELECT NAME
+FROM CIENMA
+WHERE RATING > 7 AND RATING < 9;
+
+
+
+
+-++++++++++++++++++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+WAQ TO RETRIEVE THE RECOD OF EMPLOYEEES WHOSE CATEGORY IS FULL TIME ORDERED BY SALARY IN DESCEIINDG ORDER
+
+
+CATEGORY FULL PART CONTRACT 
+
+DEAPRTMENTS ENGG HR FINANCE IT MARKETING 
+
+
+
+
+
+
+
+WAQ TO GROUP THEIR EMPOLYEES BY THEIR DEPARTMENT AND DISPLAY THE TOTAL OF EMPLOYEES
+(TOTAL_EMPLOYEES) IN EACH DEPARTMENT 
+
+SELECT DEPARTMENT , COUNT(*) AS TOTAL_EMPLYESS
+
+GROUP BY DEPARTMENT 
+
+
+
+
+
+
+
+
+
+
