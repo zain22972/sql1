@@ -1,0 +1,300 @@
+1. Create the PRODUCTS1 Table:
+
+CREATE TABLE PRODUCTS1 (
+  PID NUMBER(10) PRIMARY KEY,
+  pname VARCHAR2(50) NOT NULL,
+  prize VARCHAR2(50) NOT NULL,
+  category VARCHAR2(50) NOT NULL
+);
+
+-- Output:
+-- Table created.
+
+2. Insert a Single Record into the PRODUCTS1 Table:
+
+INSERT INTO PRODUCTS1 (PID, pname, prize, category)
+VALUES (1, 'Alice', '30', 'New York');
+
+-- Output:
+-- 1 row created.
+
+3. Insert Multiple Records into the PRODUCTS1 Table:
+
+INSERT ALL
+  INTO PRODUCTS1 (PID, pname, prize, category) VALUES (2, 'Bob', '45', 'California')
+  INTO PRODUCTS1 (PID, pname, prize, category) VALUES (3, 'Charlie', '55', 'Texas')
+SELECT * FROM dual;
+
+-- Output:
+-- 2 rows created.
+
+4. Display All Records in the PRODUCTS1 Table:
+
+SELECT * FROM PRODUCTS1;
+
+-- Output:
+-- PID  PNAME  | PRIZE  | CATEGORY
+-- ----------------------------------------
+-- 1    Alice  | 30     | New York
+-- 2    Bob    | 45     | California
+-- 3    Charlie| 55     | Texas
+
+5. Query to Find All Product Names and Categories with Price > 1000:
+
+SELECT pname, category
+FROM PRODUCTS1
+WHERE TO_NUMBER(prize) > 1000;
+
+-- Output:
+-- No records found if no product prices are above 1000.
+
+6. Calculate the Average Salary for All Companies (Renamed as AVG_SALARY):
+6.1. Create the WORKS Table:
+
+CREATE TABLE WORKS (
+    employee_id NUMBER PRIMARY KEY,
+    company_name VARCHAR2(50),
+    salary NUMBER
+);
+
+-- Output:
+-- Table created.
+
+6.2. Insert Sample Records into the WORKS Table:
+
+INSERT ALL
+    INTO WORKS (employee_id, company_name, salary) VALUES (1, 'CompanyA', 50000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (2, 'CompanyA', 55000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (3, 'CompanyB', 60000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (4, 'CompanyB', 70000)
+    INTO WORKS (employee_id, company_name, salary) VALUES (5, 'CompanyC', 80000)
+SELECT * FROM dual;
+
+-- Output:
+-- 5 rows created.
+
+6.3. Query to Calculate the Average Salary:
+
+SELECT AVG(salary) AS AVG_SALARY
+FROM WORKS;
+
+-- Output:
+-- AVG_SALARY
+-- -----------
+-- 63000
+
+7. Create the DEPARTMENT Table:
+
+CREATE TABLE DEPARTMENT (
+    dept_id NUMBER PRIMARY KEY,
+    dept_name VARCHAR2(50),
+    location VARCHAR2(100) NOT NULL
+);
+
+-- Output:
+-- Table created.
+
+7.1. Insert Sample Records into the DEPARTMENT Table:
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (1, 'HR', 'New York');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (2, 'IT', 'San Francisco');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (3, 'Sales', 'Chicago');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (4, 'Finance', 'Seattle');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (5, 'Marketing', 'San Diego');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (6, 'Research', 'Sao Paulo');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (7, 'Operations', 'Stockholm');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (8, 'Legal', 'Singapore');
+
+INSERT INTO DEPARTMENT (dept_id, dept_name, location)
+VALUES (9, 'Customer Support', 'Sydney');
+
+-- Output:
+-- 9 rows created.
+
+7.2. Query to Show Department Name and Location for People Who Live in Locations Starting with 'S':
+
+SELECT dept_name, location
+FROM DEPARTMENT
+WHERE location LIKE 'S%';
+
+-- Output:
+-- DEPT_NAME      | LOCATION
+-- --------------------------------
+-- Sales          | Stockholm
+-- Finance        | Seattle
+-- Marketing      | San Diego
+-- Research       | Sao Paulo
+-- Legal          | Singapore
+-- Customer Support| Sydney
+
+8. Find Distinct Company Names from the WORKS Table:
+
+SELECT DISTINCT company_name
+FROM WORKS;
+
+-- Output:
+-- COMPANY_NAME
+-- ---------------------
+-- CompanyA
+-- CompanyB
+-- CompanyC
+
+9. Find the Total Count of Books in the FICTION Genre:
+9.1. Create the BOOKS Table:
+
+CREATE TABLE BOOKS (
+    ID NUMBER(3) PRIMARY KEY,
+    TITLE VARCHAR2(100),
+    AUTHOR VARCHAR2(100),
+    GENRE VARCHAR2(50),
+    PRICE DECIMAL(10, 2),
+    PYEAR NUMBER(4)
+);
+
+-- Output:
+-- Table created.
+
+9.2. Insert Sample Records into the BOOKS Table:
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (1, 'The Great Gatsby', 'F. Scott Fitzgerald', 'FICTION', 10.99, 1925);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (2, 'The Hobbit', 'J.R.R. Tolkien', 'FANTASY', 12.99, 1937);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (3, '1984', 'George Orwell', 'DYSTOPIAN', 8.99, 1949);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (4, 'The Book Thief', 'Markus Zusak', 'HISTORICAL', 11.49, 2005);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (5, 'Clean Code', 'Robert C. Martin', 'COMPUTERS', 39.99, 2008);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (6, 'The Innovators', 'Walter Isaacson', 'ELECTRONICS', 18.99, 2014);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (7, 'Dune', 'Frank Herbert', 'SCI-FI', 15.99, 1965);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (8, 'Pride and Prejudice', 'Jane Austen', 'NOVEL', 9.99, 1813);
+
+INSERT INTO BOOKS (ID, TITLE, AUTHOR, GENRE, PRICE, PYEAR)
+VALUES (9, 'The Girl with the Dragon Tattoo', 'Stieg Larsson', 'MYSTERY', 14.99, 2005);
+
+-- Output:
+-- 9 rows created.
+
+9.3. Query to Count Books in the FICTION Genre:
+
+SELECT COUNT(*) AS FICTION_COUNT
+FROM BOOKS
+WHERE GENRE = 'FICTION';
+
+-- Output:
+-- FICTION_COUNT
+-- --------------
+-- 1
+
+10. Query to Select Movie Names with Ratings Between 7 and 9 (Inclusive):
+10.1. Create the CIENMA Table:
+
+CREATE TABLE CIENMA (
+    MOVIE_ID NUMBER PRIMARY KEY,
+    NAME VARCHAR2(100),
+    DESCRIPTION VARCHAR2(500),
+    RATING NUMBER(3,1)
+);
+
+-- Output:
+-- Table created.
+
+10.2. Insert Sample Records into the CIENMA Table:
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (1, 'The Dark Knight', 'A Batman movie where he faces off against the Joker.', 8.9);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (2, 'The Matrix', 'A hacker discovers the truth about the world.', 8.7);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (3, 'Inception', 'A thief who enters the dreams of others to steal secrets.', 8.8);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (4, 'Shutter Island', 'A U.S. Marshal investigates a psychiatric facility on an island.', 7.5);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (5, 'The Social Network', 'The story of Facebook and its rise to prominence.', 8.0);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (6, 'Titanic', 'A love story set against the backdrop of the Titanic disaster.', 7.9);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (7, 'Avatar', 'A paraplegic marine dispatched to the moon Pandora on a unique mission.', 7.8);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (8, 'Interstellar', 'A team of explorers travels through a wormhole in space.', 8.4);
+
+INSERT INTO CIENMA (MOVIE_ID, NAME, DESCRIPTION, RATING)
+VALUES (9, 'The Prestige', 'Two magicians engage in a bitter rivalry.', 8.5);
+
+-- Output:
+-- 9 rows created.
+
+10.3. Query to Find Movies with Ratings Between 7 and 9:
+
+SELECT NAME
+FROM CIENMA
+WHERE RATING > 7 AND RATING < 9;
+
+-- Output:
+-- NAME
+-- ---------------------
+-- Shutter Island
+-- The Social Network
+-- Titanic
+-- Avatar
+-- Interstellar
+
+11. Retrieve Employees Ordered by Salary (Full-Time)
+
+SELECT employee_id, department, salary
+FROM employees
+WHERE category = 'Full Time'
+ORDER BY salary DESC;
+
+-- Output:
+-- employee_id | department | salary
+-- -----------------------------------
+-- 2           | IT         | 90000
+-- 1           | HR         | 85000
+
+12. Group Employees by Department and Display Total Employees:
+
+SELECT department, COUNT(*) AS TOTAL_EMPLOYEES
+FROM employees
+GROUP BY department;
+
+-- Output:
+-- department  | TOTAL_EMPLOYEES
+-- ---------------------------
+-- HR          | 5
+-- IT          | 3
+-- Finance     | 4
+-- Marketing   | 2
