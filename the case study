@@ -1,0 +1,115 @@
+1. Find Employees Working in a Specific Department
+
+To find employees working in a specific department, you can join the employees table with the departments table using the dept_id (foreign key).
+
+SELECT e.employee_id, e.first_name, e.last_name, e.salary, d.dept_name
+FROM employees e
+JOIN departments d
+  ON e.dept_id = d.dept_id
+WHERE d.dept_name = 'IT';  -- You can replace 'IT' with any department name.
+
+2. Get the Total Salary Expense by Department
+
+To calculate the total salary expense for each department, you need to sum the salaries of employees grouped by department.
+
+SELECT d.dept_id, d.dept_name, SUM(e.salary) AS total_salary_expense
+FROM departments d
+JOIN employees e
+  ON e.dept_id = d.dept_id
+GROUP BY d.dept_id, d.dept_name;
+
+3. List Employees with Salary Above the Company Average Salary
+
+To find employees whose salary is above the average salary of the company, use the following query:
+
+SELECT employee_id, first_name, last_name, salary
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+
+4. Retrieve the Top 5 Highest Paid Employees
+
+To get the top 5 employees based on salary, use the ROWNUM or FETCH clause:
+
+SELECT employee_id, first_name, last_name, salary
+FROM employees
+ORDER BY salary DESC
+FETCH FIRST 5 ROWS ONLY;  -- For Oracle 12c and later
+
+For older versions of Oracle:
+
+SELECT employee_id, first_name, last_name, salary
+FROM (
+  SELECT employee_id, first_name, last_name, salary
+  FROM employees
+  ORDER BY salary DESC
+)
+WHERE ROWNUM <= 5;
+
+5. Find Projects with More Than 3 Employees Assigned to It
+
+To find projects that have more than 3 employees assigned, join the projects, employee_project, and employees tables:
+
+SELECT p.project_id, p.project_name, p.budget
+FROM projects p
+JOIN employee_project ep
+  ON ep.pid = p.project_id
+GROUP BY p.project_id, p.project_name, p.budget
+HAVING COUNT(ep.eid) > 3;
+
+6. List Employees Who Have Worked on Multiple Projects
+
+To find employees who have worked on multiple projects, use GROUP BY and HAVING to filter employees with more than one project:
+
+SELECT e.employee_id, e.first_name, e.last_name, COUNT(ep.pid) AS project_count
+FROM employees e
+JOIN employee_project ep
+  ON e.employee_id = ep.eid
+GROUP BY e.employee_id, e.first_name, e.last_name
+HAVING COUNT(ep.pid) > 1;
+
+7. Find Departments with Average Employee Salary Above 70,000
+
+To find departments where the average salary is greater than 70,000, group the results by department and use AVG():
+
+SELECT d.dept_id, d.dept_name, AVG(e.salary) AS avg_salary
+FROM departments d
+JOIN employees e
+  ON e.dept_id = d.dept_id
+GROUP BY d.dept_id, d.dept_name
+HAVING AVG(e.salary) > 70000;
+
+8. Retrieve All Employees Who Have the Role "Project Manager"
+
+To find all employees who have the role of "Project Manager", join the employees and employee_project tables and filter by the role:
+
+SELECT e.employee_id, e.first_name, e.last_name, ep.role, ep.pid
+FROM employees e
+JOIN employee_project ep
+  ON e.employee_id = ep.eid
+WHERE ep.role = 'Project Manager';
+
+Summary of SQL Queries by Topics:
+
+    Employees in Specific Department:
+        JOIN the employees and departments tables to get employees from a specific department.
+
+    Total Salary Expense by Department:
+        Use SUM() to calculate the total salary expense per department.
+
+    Employees with Salary Above the Average:
+        Use a subquery to compare individual employee salaries against the company average.
+
+    Top 5 Highest Paid Employees:
+        Use FETCH FIRST 5 ROWS ONLY or ROWNUM to get the top 5 employees by salary.
+
+    Projects with More Than 3 Employees Assigned:
+        Use COUNT() with GROUP BY and HAVING to find projects with multiple employees.
+
+    Employees Who Have Worked on Multiple Projects:
+        Use COUNT() with GROUP BY and HAVING to filter employees who have worked on multiple projects.
+
+    Departments with Average Salary Above 70,000:
+        Use AVG() with GROUP BY and HAVING to filter departments with high average salaries.
+
+    Employees with Role "Project Manager":
+        Filter employees with the role of "Project Manager" using WHERE clause.
