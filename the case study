@@ -113,3 +113,16 @@ Summary of SQL Queries by Topics:
 
     Employees with Role "Project Manager":
         Filter employees with the role of "Project Manager" using WHERE clause.
+
+
+
+9. Find Projects with No Employees Assigned
+
+To list projects that have no employees assigned, you can use a LEFT JOIN between the projects table and the employee_project table, and filter the result for rows where there is no match (i.e., no employees are assigned to the project).
+SQL Query:
+
+SELECT p.project_id, p.project_name, p.budget
+FROM projects p
+LEFT JOIN employee_project ep
+  ON p.project_id = ep.pid
+WHERE ep.eid IS NULL;
