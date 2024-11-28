@@ -1,0 +1,220 @@
+1. Creating Employee Table
+
+To create a table Employeez with columns emp_id, first_name, last_name, dept_id, and salary:
+
+CREATE TABLE Employeez (
+    emp_id        NUMBER PRIMARY KEY,  -- Employee ID (unique, primary key)
+    first_name    VARCHAR2(50),         -- Employee's first name
+    last_name     VARCHAR2(50),         -- Employee's last name
+    dept_id       VARCHAR2(10),         -- Department ID
+    salary        NUMBER(10, 2)         -- Salary (up to 10 digits with 2 decimals)
+);
+
+2. Inserting Data into Employeez Table
+
+Insert sample employee records:
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1001, 'John', 'Doe', 'D001', 55000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1002, 'Jane', 'Smith', 'D002', 60000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1003, 'Michael', 'Johnson', 'D001', 70000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1004, 'Emily', 'Davis', 'D003', 48000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1005, 'Chris', 'Wilson', 'D002', 75000.00);
+
+3. Creating a View for Basic Employee Info
+
+Create a view Employee_Basic_Info to show only emp_id and dept_id:
+
+CREATE VIEW Employee_Basic_Info AS
+SELECT emp_id, dept_id
+FROM Employeez;
+
+4. Querying the View
+
+To get the data from the view:
+
+SELECT emp_id, dept_id
+FROM Employee_Basic_Info;
+
+
+
+
+
+
+
+1. Creating the Procedure
+
+To create a stored procedure named greet_user that accepts a first_name as an input parameter and outputs a greeting message:
+
+CREATE OR REPLACE PROCEDURE greet_user(first_name IN VARCHAR2) AS
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE('HELLO, ' || first_name || '!');
+END;
+/
+
+    Procedure Name: greet_user
+    Input Parameter: first_name (of type VARCHAR2)
+    Action: Concatenates and displays a greeting message using DBMS_OUTPUT.PUT_LINE.
+        Greeting Format: HELLO, <first_name>!
+
+2. Executing the Procedure
+
+To execute the greet_user procedure and pass an argument (e.g., 'John'):
+
+BEGIN 
+   greet_user('John');
+END;
+/
+
+    Block Type: Anonymous PL/SQL block.
+    Execution: Calls the greet_user procedure and passes 'John' as the argument.
+
+
+1. Enabling DBMS Output
+
+Before executing any PL/SQL block that uses DBMS_OUTPUT.PUT_LINE, you need to enable server output to display the result in SQL*Plus or other Oracle tools:
+
+SET SERVEROUTPUT ON;
+
+1. Trigger for Logging New Employee Insertion
+
+A trigger is used to automatically perform actions when a certain event occurs on a table. Here we create a trigger to log a message when a new employee is added to the Employeez table.
+Trigger Creation:
+
+CREATE OR REPLACE TRIGGER log_EMP
+AFTER INSERT ON Employeez
+FOR EACH ROW
+BEGIN 
+  DBMS_OUTPUT.PUT_LINE('NEW EMPLOYEE ADDED: ' || :NEW.FIRST_NAME || ' ' || :NEW.LAST_NAME);
+END;
+/
+
+Explanation:
+
+    Trigger Name: log_EMP
+    Event: The trigger is fired after an insert operation on the Employeez table.
+    For Each Row: This ensures the trigger runs for each row inserted.
+    Action: The trigger uses DBMS_OUTPUT.PUT_LINE to display a message with the employee's FIRST_NAME and LAST_NAME.
+
+How it Works:
+
+    When a new employee is inserted into the Employeez table, the trigger automatically logs a message like:
+
+    NEW EMPLOYEE ADDED: Alice Brown
+
+    in the output.
+
+2. Procedure to Greet a New User
+
+A stored procedure in Oracle allows you to bundle SQL and PL/SQL logic for reusability. Below is an example of a procedure that greets a user by their first name.
+Procedure Creation:
+
+CREATE OR REPLACE PROCEDURE greet_user(first_name IN VARCHAR2) AS
+BEGIN 
+  DBMS_OUTPUT.PUT_LINE('HELLO, ' || first_name || '!');
+END;
+/
+
+Explanation:
+
+    Procedure Name: greet_user
+    Input Parameter: first_name (type VARCHAR2).
+    Action: The procedure uses DBMS_OUTPUT.PUT_LINE to display a greeting message like:
+
+    HELLO, John!
+
+    Execution: You can call this procedure by passing a first name as an argument.
+
+Example Execution:
+
+BEGIN 
+   greet_user('John');
+END;
+/
+
+    The above block will output:
+
+    HELLO, John!
+
+3. Inserting Data into the Employeez Table
+
+The Employeez table can be populated with data using the INSERT INTO statement. Below are examples of inserting new employee records into the Employeez table, where emp_id is unique.
+Inserting Data into Employeez Table:
+
+-- Inserting new unique data into Employeez table
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1011, 'Alice', 'Brown', 'D004', 65000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1012, 'Bob', 'Miller', 'D005', 72000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1013, 'Charlie', 'Garcia', 'D003', 55000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1014, 'Diana', 'Martinez', 'D002', 80000.00);
+
+INSERT INTO Employeez (emp_id, first_name, last_name, dept_id, salary)
+VALUES (1015, 'Eve', 'Wilson', 'D001', 63000.00);
+
+Explanation:
+
+    emp_id: Each record has a unique emp_id (1011 to 1015).
+    Employee Details: Employees' first names, last names, department IDs, and salaries are provided.
+    Purpose: These records are inserted to simulate new employees being added to the system.
+
+4. Setting Up and Using DBMS Output
+
+To view the messages generated by DBMS_OUTPUT.PUT_LINE in SQL*Plus or Oracle SQL Developer, ensure you enable server output.
+Enabling DBMS Output:
+
+SET SERVEROUTPUT ON;
+
+    Purpose: This command ensures that the output from DBMS_OUTPUT.PUT_LINE is displayed in the SQL*Plus or Oracle SQL Developer console.
+
+5. Summary of the Concepts
+
+    Trigger:
+        Purpose: Automatically logs a message when a new employee is inserted into the Employeez table.
+        Syntax: CREATE OR REPLACE TRIGGER <trigger_name> AFTER INSERT ON <table_name> FOR EACH ROW ...
+        Example: log_EMP trigger logs a message when an employee is added.
+
+    Procedure:
+        Purpose: Encapsulates logic into reusable blocks. Used here to greet users.
+        Syntax: CREATE OR REPLACE PROCEDURE <procedure_name> (parameter IN datatype) AS ...
+        Example: greet_user procedure greets users with a message.
+
+    Inserting Data:
+        Purpose: Add new rows to the Employeez table.
+        Syntax: INSERT INTO <table_name> (columns) VALUES (values);
+        Example: Inserted data for employees like Alice, Bob, Charlie, Diana, and Eve.
+
+    DBMS Output:
+        Purpose: Enable the display of messages generated by DBMS_OUTPUT.PUT_LINE.
+        Command: SET SERVEROUTPUT ON;
+
+
+Corrected Trigger:
+
+CREATE OR REPLACE TRIGGER log_EMP
+AFTER INSERT ON Employeez
+FOR EACH ROW
+BEGIN 
+  DBMS_OUTPUT.PUT_LINE('NEW EMPLOYEE ADDED: ' || :NEW.FIRST_NAME || ' ' || :NEW.LAST_NAME);
+END;
+/
+Explanation:
+
+    Trigger Name: log_EMP
+    Trigger Event: AFTER INSERT (Trigger fires after a new record is inserted into the EMPLOYEES table).
+    Trigger Timing: The trigger will fire after the insert operation.
+    Trigger Level: FOR EACH ROW means the trigger will be executed once for each inserted row.
+    DBMS_OUTPUT.PUT_LINE: Outputs the first and last name of the newly added employee.
